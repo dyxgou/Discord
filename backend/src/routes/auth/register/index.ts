@@ -20,8 +20,6 @@ const register : FastifyPluginAsync =  async(fastify , options) =>
     userInfo.password = hashedPassword
     const tag = Math.floor(Math.random() * 9999)
     userInfo.tag = tag
-
-    console.log(fastify.store , "user");
     
     await fastify.store.User.create(userInfo)    
 

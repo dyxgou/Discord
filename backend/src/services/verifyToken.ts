@@ -1,6 +1,7 @@
 import { FastifyLoggerInstance, FastifyPluginAsync, FastifyRequest } from "fastify";
 import { RouteGenericInterface } from "fastify/types/route";
 import { IncomingMessage,  Server } from "http";
+import fp from "fastify-plugin"
 
 export interface IPaylaod
 {
@@ -14,7 +15,7 @@ export interface ITokenUser
 
 type Req =  FastifyRequest<RouteGenericInterface, Server, IncomingMessage, unknown, FastifyLoggerInstance>
 
-const verifyToken : FastifyPluginAsync = async(fastify , options) => 
+const verifyToken : FastifyPluginAsync = fp(async(fastify , options) => 
 {
   fastify.decorate("auth" , (request : Req) => 
   {
@@ -24,7 +25,7 @@ const verifyToken : FastifyPluginAsync = async(fastify , options) =>
       throw fastify.httpErrors.unauthorized("Invalid Token")
     }
   })
-}
+})
 
 
 export default verifyToken

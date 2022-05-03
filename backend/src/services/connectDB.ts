@@ -24,6 +24,12 @@ const connectDB : FastifyPluginAsync = fp(async(fastify , options) =>
       User : connection.model("users" , UserSchema),
       db : connection
     })
+
+    fastify.log.info("Mongo has been coneected succesfully")
+  }).catch(err => {
+    console.error({ err , msg: "Someting went wrong when we're conneting with Mongo" })
+
+    process.exit(1)
   })
 
   process.on("uncaughtException" , (err) => {
