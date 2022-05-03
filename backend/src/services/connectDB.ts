@@ -1,4 +1,5 @@
 import { FastifyPluginAsync } from "fastify"
+import fp from "fastify-plugin"
 import * as mongoose from "mongoose"
 import UserSchema, { IUser } from "../schemas/UserSchema"
 
@@ -8,7 +9,7 @@ export interface IStore
   db : typeof mongoose
 }
 
-const connectDB : FastifyPluginAsync = async(fastify , options) => 
+const connectDB : FastifyPluginAsync = fp(async(fastify , options) => 
 {
   const URI = process.env.MONGO_URI
 
@@ -23,11 +24,6 @@ const connectDB : FastifyPluginAsync = async(fastify , options) =>
       User : connection.model("users" , UserSchema),
       db : connection
     })
-
-    fastify.log.info("Mongoose has been connected succesfully")
-  }).catch(err => {
-    fastify.log.error({ err })
-    process.exit(1)
   })
 
   process.on("uncaughtException" , (err) => {
@@ -35,7 +31,7 @@ const connectDB : FastifyPluginAsync = async(fastify , options) =>
     
     mongoose.disconnect()
   })
-}
+})
 
 
 export default connectDB

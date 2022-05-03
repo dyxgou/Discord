@@ -33,7 +33,7 @@ const UserSchema = new Schema<IUser>(
     },
     tag : {
       type : Number,
-      default : Math.floor(Math.random() * 9999)
+      required : true
     },
     aboutMe : {
       type : String,

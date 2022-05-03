@@ -11,9 +11,9 @@ export interface SupportPluginOptions {
 // to export the decorators to the outer scope
 export default fp<SupportPluginOptions>(async (fastify, opts) => {
   
-  void await fastify.register(connectDB)
-  void await fastify.register(registerJWT)
-  void await fastify.register(verifyToken)
+  void fastify.register(connectDB)
+  void fastify.register(registerJWT)
+  void fastify.register(verifyToken)
 })
 
 // When using .decorate you have to specify added properties for Typescript
