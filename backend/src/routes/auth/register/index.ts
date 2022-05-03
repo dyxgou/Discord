@@ -18,24 +18,14 @@ const register : FastifyPluginAsync =  async(fastify , options) =>
 
     const hashedPassword = await hashPassword(password)
     userInfo.password = hashedPassword
+    const tag = Math.floor(Math.random() * 9999)
+    userInfo.tag = tag
 
-    try {
-      await fastify.store.User.create(userInfo ,  (err , user) => 
-      {
-        console.log({ user });
-        
-        if(err || !user)
-          throw fastify.httpErrors.createError({ error : err , msg : "Error to register the user" })
+    console.log(fastify.store , "user");
+    
+    await fastify.store.User.create(userInfo)    
 
-        return reply.status(201).send(user)
-      })      
-
-      return reply.status(201).send("User created")
-    } catch (error) {
-      fastify.log.error({ error })
-      fastify.httpErrors.badRequest("Error registering the user")
-    }
-
+    return reply.status(201).send("User created")
   })
 }
 
