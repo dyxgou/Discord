@@ -1,5 +1,6 @@
 import { Schema , Document } from "mongoose"
 
+type Friends = Schema.Types.ObjectId[] & IUser
 
 export interface IUser extends Document
 {
@@ -7,9 +8,9 @@ export interface IUser extends Document
   password : string,
   username : string,
   tag : number,
-  friends : Schema.Types.ObjectId[] & IUser
-  friendsPending : Schema.Types.ObjectId[] & IUser,
-  friendsRequest : Schema.Types.ObjectId[] & IUser,
+  friends : Friends
+  friendsPending : Friends,
+  friendsRequest : Friends,
   avatar : string,
   cover : string,
   aboutMe : string,
@@ -48,19 +49,22 @@ const UserSchema = new Schema<IUser>(
     friends : [
       {
         type : Schema.Types.ObjectId,
-        ref : "users"
+        ref : "users",
+        unique : true
       }
     ],
     friendsPending : [
       {
         type : Schema.Types.ObjectId,
-        ref : "users"
+        ref : "users",
+        unique : true,
       }
     ],
     friendsRequest : [
       {
         type : Schema.Types.ObjectId,
-        ref : "users"
+        ref : "users",
+        unique : true
       }
     ],
   },
