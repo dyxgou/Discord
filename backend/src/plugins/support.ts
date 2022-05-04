@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin'
 import connectDB, { IStore } from '../services/connectDB';
 import registerJWT from '../services/registerJWT';
-import verifyToken, { IPaylaod, ITokenUser } from '../services/verifyToken';
+import verifyToken, { IPaylaod, ITokenUser, VerifyToken } from '../services/verifyToken';
 
 export interface SupportPluginOptions {
   // Specify Support plugin options here
@@ -19,7 +19,8 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
 // When using .decorate you have to specify added properties for Typescript
 declare module 'fastify' {
   export interface FastifyInstance {
-    store : IStore 
+    store : IStore,
+    auth : VerifyToken
   }
 }
 
