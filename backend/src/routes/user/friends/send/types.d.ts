@@ -2,8 +2,8 @@ import { Type , Static } from '@sinclair/typebox'
 
 const sendRequestBody = Type.Object(
   {
-    userIdToAccept : Type.String()
+    friendEmail : Type.String()
   }
 )
 
-export type SendRequest = Static<typeof sendRequestBody>
+export type SendBody = Static<typeof sendRequestBody>
