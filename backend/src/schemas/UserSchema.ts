@@ -50,21 +50,18 @@ const UserSchema = new Schema<IUser>(
       {
         type : Schema.Types.ObjectId,
         ref : "users",
-        unique : true
       }
     ],
     friendsPending : [
       {
         type : Schema.Types.ObjectId,
         ref : "users",
-        unique : true,
       }
     ],
     friendsRequest : [
       {
         type : Schema.Types.ObjectId,
         ref : "users",
-        unique : true
       }
     ],
   },
