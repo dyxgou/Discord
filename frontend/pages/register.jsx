@@ -8,7 +8,7 @@ const register = () =>
         <h1>Register on Discord!</h1>
 
         <form>
-          
+           
         </form>
       </main>
     </div>
